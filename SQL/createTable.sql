@@ -31,7 +31,7 @@
 -- tabela tipoQuantidade
  create table tipoQuantidade (
      id int auto_increment primary key, -- 1 = unitário, 2 = decimal
-     tipo varchar(10);
+     tipo varchar(10)
  );
 
 -- tabela produto
