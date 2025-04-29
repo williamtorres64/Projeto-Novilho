@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
-$user = "Eduardo";
-$pass = "321";
-$dbname = "eduardo";
+$user = "petruci";
+$pass = "123";
+$dbname = "petruci";
 $link = new mysqli($host, $user, $pass, $dbname);
 /* 
 echo "<pre>";

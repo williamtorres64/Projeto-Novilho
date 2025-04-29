@@ -52,4 +52,31 @@ foreach ($resultado as $rs) {
     </div>
   </section>
 
+  <section class="product">
+    <h2 class="product-title">Acém</h2>
+    <div class="product-box">
+      <div class="product-image">foto</div>
+      <div class="product-description">
+        <p>O acém é uma carne de fibras longas e com boa quantidade de colágeno, sendo ideal para preparos que exigem cozimento lento, como ensopados, carnes de panela, guisados e até hambúrgueres artesanais. Versátil e saborosa, quando bem preparada, o acém entrega uma textura macia e suculenta.</p>
+        <li>Sugestão de pratos: Carne de panela (com batatas e cenoura);</li><li>Ensopado de acém (com legumes);</li> <li>Carne louca (desfiada para sanduíches);</li> <li>Picadinho de acém (com arroz e farofa).</li>
+      </div>
+      <button class="buy-button">Comprar</button>
+    </div>
+  </section>
+  
+  <section class="product">
+    <h2 class="product-title">Asa de frango</h2>
+    <div class="product-box">
+      <div class="product-image">foto</div>
+      <div class="product-description">
+        <p>A asa de frango é a parte do frango composta por três partes: drumette, flat e ponta. É muito popular em petiscos e churrascos devido à sua carne saborosa e suculenta, especialmente quando assada ou frita.</p>
+        <p>Sugestão de pratos: Asa de frango frita, Asa de frango assada com ervas, Asa de frango na air fryer.</p>
+      </div>
+      <button class="buy-button">Comprar</button>
+    </div>
+  </section>
+
+  
+
+
 

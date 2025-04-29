@@ -92,7 +92,7 @@
   .product {
     background-color: #fff;
     margin: 30px auto;
-    max-width: 1000px;
+    max-width: 1500px;
     border: 1px solid #ddd;
     border-left: 10px solid #8b0000;
     border-radius: 5px;
@@ -114,8 +114,8 @@
   }
   
   .product-image {
-    width: 120px;
-    height: 120px;
+    width: 170px;
+    height: 100px;
     background-color: #f2dede;
     color: #8b0000;
     font-weight: bold;
