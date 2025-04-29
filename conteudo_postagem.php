@@ -1,0 +1,55 @@
+<?php
+include_once("conexao.php");
+
+$sql = "SELECT `id`, `titulo`, `imagem`, `chamada`, `dataDeCadastro`, `idUsuario`, `status` FROM
+`postagens` WHERE 1";
+
+$resultado = mysqli_query($link, $sql);
+/* echo "<prev>";
+var_dump($resultado);
+echo "</prev>";
+foreach ($resultado as $rs) {
+    echo "<pre>";
+    var_dump($rs);
+    echo "</pre>";
+    echo $rs['titulo'];
+} */
+?>
+
+<?php
+
+/*
+echo '<div id="conteudo_principal">
+    <h1 class="titulos">Postagens</h1>';
+
+foreach ($resultado as $rs) {
+
+    echo '<div class="postagens">
+        <h1 class="titulos">' . $rs["titulo"] . '</h1>
+        <img src="' . $rs['imagem'] . '" class="imagem" style="height:100px">
+        <p class="paragrafo">' . $rs["chamada"] . '</p>
+        <span class="data">' . date("d/m/Y h:m", strtotime($rs["dataDeCadastro"])) . '</span>
+</div>';
+}
+?>
+</div>
+*/
+?>
+<section class="product">
+    <h2 class="product-title">Picanha</h2>
+    <div class="product-box">
+      <div class="product-image">foto</div>
+      <div class="product-description">
+        <p>A picanha é um corte de carne bovina muito apreciado no Brasil, famoso por sua maciez e sabor marcante. Ela tem uma camada de gordura que, quando bem preparada, confere suculência e um sabor irresistível à carne.</p>
+        <p>Os melhores pratos com picanha incluem:</p>
+        <ul>
+          <li>Churrasco de picanha: Grelhada na brasa, fatiada em pedaços grossos e temperada apenas com sal grosso.</li>
+          <li>Picanha na manteiga: Selada na frigideira com alho e manteiga, ideal para um preparo rápido e delicioso.</li>
+          <li>Picanha ao forno: Assada lentamente com ervas e acompanhada de batatas ou legumes.</li>
+        </ul>
+      </div>
+      <button class="buy-button">Comprar</button>
+    </div>
+  </section>
+
+
