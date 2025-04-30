@@ -19,7 +19,8 @@
      complemento varchar(100) not null,
      cep char(8) not null,
      email varchar(100) not null unique,
-     senha varchar(100) not null
+     senha varchar(100) not null,
+     telefone char(11) not null
  );
 
 -- tabela categoria
