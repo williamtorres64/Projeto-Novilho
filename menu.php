@@ -1,5 +1,3 @@
-
-
 <nav>
     <a href="#">Bovinos</a>
     <a href="#">Aves</a>

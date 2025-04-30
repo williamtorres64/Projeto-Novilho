@@ -92,7 +92,7 @@
   .product {
     background-color: #fff;
     margin: 30px auto;
-    max-width: 1500px;
+    max-width: 1000px;
     border: 1px solid #ddd;
     border-left: 10px solid #8b0000;
     border-radius: 5px;
@@ -114,8 +114,8 @@
   }
   
   .product-image {
-    width: 170px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     background-color: #f2dede;
     color: #8b0000;
     font-weight: bold;
@@ -184,3 +184,99 @@
 .form > input{
     margin-bottom: 15px;
 }
+
+img{ 
+margin-top: 2%;
+width: 50px;
+height: 50px;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 20px;
+}
+
+.imagem .foto {
+  width: 220px;
+  height: 220px;
+  background-color: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  color: #333;
+  font-weight: bold;
+  border: 2px dashed #999;
+  border-radius: 10px;
+}
+
+.detalhes {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.detalhes h2 {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.detalhes p {
+  font-size: 1.1em;
+}
+
+.quantidade {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantidade input {
+  width: 70px;
+  padding: 6px;
+  text-align: right;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.95em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: none;
+}
+
+.botoes {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.adicionar {
+  background-color: #f6b21e;
+  color: #000;
+}
+
+.comprar {
+  background-color: #f26434;
+  color: white;
+}
+  
+

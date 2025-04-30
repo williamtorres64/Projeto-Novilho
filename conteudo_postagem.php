@@ -48,7 +48,7 @@ foreach ($resultado as $rs) {
           <li>Picanha ao forno: Assada lentamente com ervas e acompanhada de batatas ou legumes.</li>
         </ul>
       </div>
-      <button class="buy-button">Comprar</button>
+      <button class="buy-button"><a href="adicionaProd.php">Comprar</a></button>
     </div>
   </section>
 

@@ -15,15 +15,16 @@ $login = $_GET['login'];
 }
 ?>
 <header>
-    <div class="logo">logo</div>
+    <div class="logo"><a href="index.php"><img src="imagens/Beef.png" alt="Beef"></a></a></div>
+    <div class="user_contrls"><a href="painel.php">Painel</a></div>
     <div class="search-bar">
         <input type="text" placeholder="pesquisar"><button>🔍</button>
      </div>
      <span style="margin-left: 10px;">UserName</span>
      <div class="user-controls">
         <a href="#">Carrinho</a>
-        <a href="#">Cadastro</a>
-        <a href="#">Entrar</a>
+        <a href="regCliente.php">Cadastro</a>
+        <a href="form_login.php">Entrar</a>
     </div>
 </header>
 
