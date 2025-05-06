@@ -40,13 +40,10 @@
      id int auto_increment primary key,
      nome varchar(100) not null,
      categoriaId int not null,
-     estoque float(24) not null,
-     estoqueTipoQuantidadeId int not null,
      valor float(24) not null,
      descricao varchar(500),
      nomeImagem varchar(100),
-     foreign key (categoriaId) references categoria(id),
-     foreign key (estoqueTipoQuantidadeId) references tipoQuantidade(id)
+     foreign key (categoriaId) references categoria(id)
  );
 
 -- tabela formaPagamento
@@ -85,6 +82,7 @@
      produtoId int not null,
      quantidade float(24) not null,
      tipoQuantidadeId int not null,
+     observacao varchar(512),
      foreign key (clienteId) references cliente(id),
      foreign key (produtoId) references produto(id),
      foreign key (tipoQuantidadeId) references tipoQuantidade(id)
