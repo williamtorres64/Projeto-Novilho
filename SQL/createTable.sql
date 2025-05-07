@@ -1,3 +1,7 @@
+drop database if exists novilho;
+create database novilho;
+use novilho;
+
 /* Script SQL para criação das tabelas e relacionamentos */
 
 -- limpa tabelas existentes para recriação
