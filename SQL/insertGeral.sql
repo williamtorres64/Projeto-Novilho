@@ -1,3 +1,5 @@
+use novilho;
+
 -- TABELAS DE DOMÍNIO
 INSERT INTO `categoria` (`id`, `nome`) VALUES
 (1, 'Bovinos'),
@@ -8,17 +10,17 @@ INSERT INTO `categoria` (`id`, `nome`) VALUES
 (6, 'Churrasco');
 
 
-INSERT INTO `formapagamento` (`id`, `nome`) VALUES
+INSERT INTO `formaPagamento` (`id`, `nome`) VALUES
 (1, 'PIX'),
 (2, 'Débito'),
 (3, 'Crédito');
 
 
-INSERT INTO `tipoquantidade` (`id`, `tipo`) VALUES
+INSERT INTO `tipoQuantidade` (`id`, `tipo`) VALUES
 (1, 'Inteiro'),
 (2, 'Decimal');
 
-INSERT INTO `tipousuario`(`nome`) VALUES ('Cliente'),('Administrador');
+INSERT INTO `tipoUsuario`(`nome`) VALUES ('Cliente'),('Administrador');
 
 -- DADOS FICTÍCIOS
 INSERT INTO `usuario` (`id`, `cpf`, `nome`, `endereco`, `complemento`, `cep`, `email`, `senha`, `telefone`, `tipoId`) VALUES
@@ -71,7 +73,7 @@ INSERT INTO `produto` (`nome`, `categoriaId`, `valor`, `descricao`, `nomeImagem`
 ('Molho Barbecue Tradicional', FLOOR(RAND() * 6) + 1, ROUND(RAND() * 18 + 7, 2), 'Molho barbecue clássico para acompanhar carnes.', 'molho_bbq.jpg');
 
 
-INSERT INTO `usuariocarrinho` (`usuarioId`, `produtoId`, `quantidade`, `tipoQuantidadeId`) VALUES
+INSERT INTO `usuarioCarrinho` (`usuarioId`, `produtoId`, `quantidade`, `tipoQuantidadeId`) VALUES
 (FLOOR(RAND() * 10) + 1, FLOOR(RAND() *32) + 1, FLOOR(RAND() * 10) + 1, 1), -- Quantidade inteira
 (FLOOR(RAND() * 10) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 5 + 0.1, 2), 2), -- Quantidade float
 (FLOOR(RAND() * 10) + 1, FLOOR(RAND() *32) + 1, FLOOR(RAND() * 8) + 1, 1),
@@ -177,7 +179,7 @@ INSERT INTO `compra` (`usuarioId`, `data`, `formaPagamentoId`) VALUES
 (FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1);
 
 
-INSERT INTO `compraproduto` (`idCompra`, `idProduto`, `valor`, `quantidade`, `tipoQuantidadeId`) VALUES
+INSERT INTO `compraProduto` (`idCompra`, `idProduto`, `valor`, `quantidade`, `tipoQuantidadeId`) VALUES
 (FLOOR(RAND() *32) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 200 + 10, 2), FLOOR(RAND() * 10) + 1, 1), -- Quantidade inteira
 (FLOOR(RAND() *32) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 150 + 5, 2), ROUND(RAND() * 5 + 0.1, 2), 2), -- Quantidade float
 (FLOOR(RAND() *32) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 180 + 8, 2), FLOOR(RAND() * 8) + 1, 1),
