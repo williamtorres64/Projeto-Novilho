@@ -7,7 +7,7 @@ require_once("conexao.php"); // Usamos require_once para garantir que o arquivo 
 
 // Verifica se os dados foram enviados pelo formulário
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header("Location: form_login.php");
+    header("Location: entrar.php");
     exit();
 }
 
@@ -16,7 +16,7 @@ $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
 $senha = $_POST['senha'] ?? '';
 
 // Prepara a consulta SQL segura usando prepared statements
-$sql = "SELECT usuario.id, usuario.nome,`email`, `senha`, tu.nome as tipo FROM `usuario` inner join tipousuario tu on tu.id = usuario.tipoId WHERE email = ?";
+$sql = "SELECT usuario.id, usuario.nome,`email`, `senha`, tu.nome as tipo FROM `usuario` inner join tipoUsuario tu on tu.id = usuario.tipoId WHERE email = ?";
 
 // Prepara a declaração
 $stmt = mysqli_prepare($link, $sql);

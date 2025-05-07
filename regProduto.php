@@ -1,7 +1,12 @@
 <?php
+session_start();
 // Inclui o arquivo de conexão com o banco de dados
 include_once("conexao.php");
 
+if ($_SESSION['logado'] !== true){
+    header("Location: entrar.php");
+    exit();
+}
 // Monta a instrução SQL para selecionar os dados da tabela 'produto', ordenando por ID
 $sql = "
     SELECT prod.id, prod.nome, prod.nomeImagem, prod.descricao, prod.valor

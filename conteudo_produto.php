@@ -2,11 +2,14 @@
 // Conexão com o banco de dados
 include_once("conexao.php");
 
+
 // Consulta SQL para buscar produtos
 $sql = "SELECT prod.id, prod.nome, `valor`, `descricao`, `nomeImagem` 
-        FROM `produto` prod
+        FROM `produto` as prod
         INNER JOIN categoria cat ON cat.id = prod.categoriaId";
 $resultado = mysqli_query($link, $sql); // Executa a consulta
+print_r(mysqli_fetch_assoc($resultado));
+exit();
 ?>
 
 <!-- Listagem de produtos -->
@@ -34,7 +37,7 @@ $resultado = mysqli_query($link, $sql); // Executa a consulta
             
             <!-- Botão de ação -->
             <button class="buy-button">
-                <a href="regProduto.php?id=<?= $rs["id"] ?>">Comprar</a>
+            <a href="adicionaProd.php?id=<?= htmlspecialchars($rs['prod.id']) ?>">Comprar</a>
             </button>
         </div>
     </section>

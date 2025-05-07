@@ -5,23 +5,6 @@ session_start();
 // Inclui o arquivo de conexão com o banco de dados
 include_once("conexao.php");
 
-// Desativa a exibição de erros (não recomendado para desenvolvimento)
-error_reporting(0);
-
-// Verifica se o usuário está logado:
-// 1. Pelo parâmetro GET 'login=ok' OU
-// 2. Pela existência da variável de sessão 'id'
-$login = $_GET['login'];
-if (($login == 'ok') || ($_SESSION['id'] > 0)) {
-    // Se logado, mostra mensagem de boas-vindas com o nome do usuário
-    $texto = "Seja bem vindo! " . $_SESSION['nome'];
-    // Cria botão de logout estilizado em vermelho
-    $btnLogOff = "<a href='logoff.php' class='link_top' style='background:red'>Sair</a>";
-} else {
-    // Se não logado, deixa as variáveis vazias
-    $texto = "";
-    $btnLogOff = "";
-}
 ?>
 
 <!-- Cabeçalho da página -->
