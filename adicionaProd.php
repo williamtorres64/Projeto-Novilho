@@ -27,9 +27,17 @@ $rs = mysqli_fetch_assoc($resultado);
 if ($rs['tipo'] == "Inteiro") {
     $tipo = "unidade";
     $travarInteiro = 'onchange="this.value = parseInt(this.value);"';
+    $placeholder = "0";
+    $unidade = "unidades";
+    $step = "1";
+
+    echo "<style>#observacao {display: none};</style>";
 } else if ($rs['tipo'] = "Decimal") {
     $tipo = "Kg";
     $travarInteiro = '';
+    $placeholder = "0,0";
+    $unidade = "Kg";
+    $step = "0.1";
 } else {
     $tipo = "Erro";
 }
@@ -39,61 +47,68 @@ if ($rs['tipo'] == "Inteiro") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novilho Cortes</title>
     <link rel="stylesheet" href="estilo.css">
 </head>
+
 <body>
-   <div id="geral">
+    <div id="geral">
         <div id="topo">
             <?php
-                include "topo.php";
+            include "topo.php";
             ?>
         </div>
-       
+
         <div id="menu">
             <?php
-                include "menu.php";
+            include "menu.php";
             ?>
         </div>
-        
+
         <div id="conteudo">
             <!-- INÍCIO DO CONTEÚDO DA CARNE -->
             <div class="container">
                 <div class="imagem">
-                    <img src="/imagens/<?php echo $rs['nomeImagem'] ?>" alt="foto produto" class="foto">
+                    <img src="<?php echo $rs['nomeImagem'] ?>" alt="foto produto" class="foto">
                 </div>
                 <div class="detalhes">
                     <form action="cadCarrinho.php" method="post">
-                    <h2><?php echo $rs['nome'] ?></h2>
+                        <h2><?php echo $rs['nome'] ?></h2>
                         <p><?php echo $rs['descricao'] ?></p>
                         <p><strong>Preço por <?php echo $tipo ?>: R$<?php echo $rs['valor'] ?></strong></p>
-                    <div class="quantidade">
-                        <label for="quantidade">Quantidade</label>
-                        <input type="number" name="quantidade" placeholder="0,0" step="0.1" <?php echo $travarInteiro; ?>> Kg
-                    </div>
-                    <p><strong>observações:</strong></p>
-                    <textarea rows="3" name="observacao" placeholder="(como cortar, embalagem, etc.)"></textarea>
+                        <div class="quantidade">
+                            <label for="quantidade">Quantidade</label>
+                            <input required="number" name="quantidade" placeholder="<?php echo $placeholder ?>" step="<?php echo $step ?>" <?php echo $travarInteiro; ?>> 
+                            <?php echo $unidade ?>
 
-                    <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
-                    <input type="hidden" name="tipoQuantidadeId" value="<?php echo $rs['tqid'] ?>">
+                        </div>
+                        <div id="observacao">
+                            <p><strong>observações:</strong></p>
+                            <textarea rows="3" name="observacao" placeholder="(como cortar, embalagem, etc.)"></textarea>
+                        </div>
 
-                    <div class="botoes">
-                        <button class="btn adicionar" type="submit" name="acao" value="adicionar">Adicionar</button>
-                    </div>
+                        <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
+                        <input type="hidden" name="tipoQuantidadeId" value="<?php echo $rs['tqid'] ?>">
+
+                        <div class="botoes">
+                            <button class="btn adicionar" type="submit" name="acao" value="adicionar">Adicionar</button>
+                        </div>
                     </form>
                 </div>
             </div>
             <!-- FIM DO CONTEÚDO DA CARNE -->
         </div>
-        
+
         <div id="rodape">
             <?php
-                include "rodape.php";
+            include "rodape.php";
             ?>
         </div>
-    </div> 
+    </div>
 </body>
+
 </html>

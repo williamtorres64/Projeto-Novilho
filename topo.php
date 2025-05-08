@@ -19,7 +19,7 @@ include_once("conexao.php");
 <header>
     <!-- Logo da empresa com link para a página inicial -->
     <div class="logo">
-        <a href="index.php"><img src="imagens/Beef.png" alt="Beef"></a>
+        <a href="index.php"><img src="imagens/logo.png" alt="logo"></a>
     </div>
     
     <!-- Link para o painel administrativo -->
@@ -28,7 +28,7 @@ include_once("conexao.php");
     <!-- Barra de pesquisa -->
     <div class="search-bar">
         <input type="text" placeholder="pesquisar">
-        <button>🔍</button>
+        <button>🔍️</button>
     </div>
     
     <!-- Espaço para nome do usuário (atualmente estático) -->

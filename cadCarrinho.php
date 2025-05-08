@@ -1,29 +1,23 @@
 <?php
 session_start();
+include_once("conexao.php");
+
 var_dump($_POST);
 
-$quantidade = $_POST['quantidade'];
+$quantidade = strtr($_POST['quantidade'], ",", ".");
 $observacao = $_POST['observacao'];
 $produtoId = $_POST['id'];
 $tipoQuantidadeId = $_POST['tipoQuantidadeId'];
 $usuarioId = $_SESSION['usuario_id'];
 
-// IMPORTANTE: Use sempre prepared statements para evitar SQL injection
-$sql = "INSERT INTO `usuariocarrinho` (`usuarioId`, `produtoId`, `quantidade`, `tipoQuantidadeId`, `observacao`) VALUES (?, ?, ?, ?, ?)";
+$sql = "INSERT INTO `usuarioCarrinho` (`usuarioId`, `produtoId`, `quantidade`, `tipoQuantidadeId`, `observacao`) VALUES (?, ?, ?, ?, ?)";
 
-// Exemplo usando MySQLi
-$conn = new mysqli('localhost', 'root', 'root', 'seu_banco');
-
-if ($conn->connect_error) {
-    die("Erro de conexão: " . $conn->connect_error);
-}
-
-$stmt = $conn->prepare($sql);
+$stmt = $link->prepare($sql);
 if ($stmt === false) {
-    die("Erro ao preparar: " . $conn->error);
+    die("Erro ao preparar: " . $link->error);
 }
 
-$stmt->bind_param("iiiss", $usuarioId, $produtoId, $quantidade, $tipoQuantidadeId, $observacao);
+$stmt->bind_param("iidis", $usuarioId, $produtoId, $quantidade, $tipoQuantidadeId, $observacao);
 
 if ($stmt->execute()) {
     echo "Item adicionado ao carrinho com sucesso!";
@@ -32,5 +26,8 @@ if ($stmt->execute()) {
 }
 
 $stmt->close();
-$conn->close();
+$link->close();
+
+    header("Location: index.php");
+    exit();
 ?>

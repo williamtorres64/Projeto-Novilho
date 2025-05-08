@@ -2,8 +2,8 @@
 error_reporting(E_ERROR | E_WARNING);
 // Define as informações de conexão com o banco de dados
 $host = "localhost";
-$user = "william";
-$pass = "123";
+$user = "root";
+$pass = "aurora";
 $dbname = "novilho";
 
 // Cria a conexão com o banco usando MySQLi orientado a objetos

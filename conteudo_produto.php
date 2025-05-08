@@ -35,9 +35,7 @@ $resultado = mysqli_query($link, $sql); // Executa a consulta
             </div>
             
             <!-- Botão de ação -->
-            <button class="buy-button">
-            <a href="adicionaProd.php?id=<?= htmlspecialchars($rs['id']) ?>">Comprar</a>
-            </button>
+            <a class="buy-button" href="adicionaProd.php?id=<?= htmlspecialchars($rs['id']) ?>">Comprar</a>
         </div>
     </section>
 <?php endwhile; ?>

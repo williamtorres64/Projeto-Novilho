@@ -1,40 +1,69 @@
 <?php
+session_start();
 // Conecta ao banco e busca todas as postagens
 include_once("conexao.php");
-$sql = "SELECT id, titulo, imagem FROM postagens"; // Seleciona dados básicos
+$sql = "select uc.id as ucid, p.id as pid, quantidade, tq.tipo as tipo, observacao, p.nome as pnome, valor, nomeImagem from usuarioCarrinho uc
+inner join produto p on p.id = uc.produtoId
+inner join tipoQuantidade tq on tq.id = uc.tipoQuantidadeId
+where usuarioId = ".$_SESSION['usuario_id']; // Seleciona dados básicos
 $resultado = mysqli_query($link, $sql);
-
+$valorTotal = 0;
 // Para cada postagem encontrada...
-while ($post = mysqli_fetch_assoc($resultado)) {
+while ($rs = mysqli_fetch_assoc($resultado)) {
+    $valorTotal += $rs['valor'] * $rs['quantidade'];
+    if ($rs['tipo'] == "Inteiro") {
+        $tipo = "unidade";
+        $travarInteiro = 'onchange="this.value = parseInt(this.value);"';
+        $placeholder = "0";
+        $unidade = "unitário";
+        if ($rs['quantidade'] != 1) {
+            $nomeQuantidade = "Unidades";
+        } else {
+        $nomeQuantidade = "Unidade";
+
+}
+        $step = "1";
+
+        echo "<style>#observacao {display: none};</style>";
+    } else if ($rs['tipo'] = "Decimal") {
+        $tipo = "Kg";
+        $travarInteiro = '';
+        $placeholder = "0,0";
+        $unidade = "Kg";
+        $step = "0.1";
+        $nomeQuantidade = "Kg";
+    } else {
+        $tipo = "Erro";
+    }
     echo '
     <div class="item-carrinho">
         <div class="item-esquerda">
             <div class="imagem-produto">
                 <!-- Mostra a imagem do produto -->
-                <img src="'.htmlspecialchars($post["imagem"]).'" alt="foto">
+                <img src="' . htmlspecialchars($rs["nomeImagem"]) . '" alt="foto">
             </div>
             <div class="detalhes-produto">
                 <!-- Mostra título e informações FIXAS (não vem do banco) -->
-                <p class="nome-produto">'.htmlspecialchars($post["titulo"]).'</p>
-                <p><strong>Quantidade</strong><br>1,00kg</p>
-                <p><strong>Valor kg</strong><br>R$ 65,00</p>
+                <p class="nome-produto">' . $rs["pnome"] . '</p>
+                <p><strong>Quantidade</strong><br>' . $rs['quantidade'] . ' ' . $nomeQuantidade . '</p>
+                <p><strong>Valor ' . $unidade . ' </strong><br>R$ ' . $rs['valor'] . '</p>
             </div>
         </div>
         <div class="botoes">
             <!-- Botões que levam para páginas de edição/exclusão passando o ID -->
-            <a href="regProduto.php?id='.$post["id"].'" class="botao editar">Editar</a>
-            <a href="remover.php?id='.$post["id"].'" class="botao remover">Remover</a>
+            <a href="removerCarrinho.php?ucid=' . $rs["ucid"] . '" class="botao remover">Remover</a>
         </div>
     </div>';
 }
+            //<a href="regProduto.php?id=' . $rs["id"] . '" class="botao editar">Editar</a>
 ?>
 
 <!-- Rodapé FIXO do carrinho (não muda) -->
 <div class="rodape-carrinho">
-    <p><strong>Valor total:</strong> R$</p> <!-- Total vazio (deveria ser calculado) -->
+<p><strong>Valor total:</strong> R$<?php echo str_replace('.', ',', $valorTotal) ?></p> <!-- Total vazio (deveria ser calculado) -->
     <div class="botoes-acao">
         <!-- Botões para continuar comprando ou finalizar -->
-        <button class="botao continuar"><a href="index.php">Continuar comprando</a></button>
-        <button class="botao finalizar"><a href="finalizacao.php">Finalizar compra</a></button>
+        <a href="index.php"class="botao">Continuar comprando</a>
+        <a href="finalizacao.php"class="botao">Finalizar compra</a>
     </div>
 </div>
