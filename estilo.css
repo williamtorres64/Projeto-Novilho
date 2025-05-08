@@ -216,7 +216,7 @@ img {
 }
 
 .detalhes {
-	max-width: 500px;
+	width: 650px;
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
@@ -248,7 +248,7 @@ img {
 }
 
 textarea {
-	width: 100%;
+	max-width: 500px;
 	padding: 10px;
 	font-size: 0.95em;
 	border-radius: 5px;

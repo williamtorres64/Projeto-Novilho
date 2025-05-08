@@ -1,7 +1,15 @@
 <?php
 // Inicia a sessão para armazenar dados do usuário
 session_start();
-
+if (isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == "Administrador") {
+    $btnPainel = '<div class="user-controls">
+        <a href="painel.php">Painel</a>
+    </div>';
+} else {
+    $btnPainel = '';
+}
+$nome = $_SESSION['usuario_nome']
+;
 // Inclui o arquivo de conexão com o banco de dados
 include_once("conexao.php");
 
@@ -15,9 +23,7 @@ include_once("conexao.php");
     </div>
     
     <!-- Link para o painel administrativo -->
-    <div class="user_contrls">
-        <a href="painel.php">Painel</a>
-    </div>
+    <?php echo $btnPainel ?>
     
     <!-- Barra de pesquisa -->
     <div class="search-bar">
@@ -26,17 +32,26 @@ include_once("conexao.php");
     </div>
     
     <!-- Espaço para nome do usuário (atualmente estático) -->
-    <span style="margin-left: 10px;">UserName</span>
+    <span style="margin-left: 10px;"><?php echo $nome ?></span>
     
     <!-- Controles do usuário -->
     <div class="user-controls">
         <a href="carrinho.php">Carrinho</a>
         <a href="cadCliente.php">Cadastro</a>
-        <a href="entrar.php">Entrar</a>
+<?php
+// Verifica se o usuário está logado
+if (isset($_SESSION['logado']) && $_SESSION['logado'] == true) {
+    // Se o usuário estiver logado, exibe o botão de logout
+    $btnLogOff = '<a href="logout.php">Sair</a>';
+} else {
+    // Se não estiver logado, exibe o botão de login
+    $btnLogOff = '<a href="entrar.php">Entrar</a>';
+}
+echo $btnLogOff;
+session_write_close();
+
+
+?>
     </div>
 </header>
 
-<!-- Área que exibe o botão de logout (se usuário estiver logado) -->
-<div>
-    <?php echo $btnLogOff; ?>
-</div>

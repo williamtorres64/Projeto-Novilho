@@ -93,7 +93,18 @@ if ($resultado) {
                             <?php echo htmlspecialchars($categoria['nome']); ?>
                         </option>
                     <?php endforeach; ?>
-                </select><br><br>          
+                </select><br><br>         
+                
+                <!-- Campo Tipo quantidade-->
+                <label class="legenda">Produto unitário ou decimal:</label><br>
+                <select name="tipoQuantidade" class="campos" required>
+                    
+                        <option value="1">Unitário</option>
+                        <option value="2">Decimal</option>
+
+         
+                    
+                </select><br><br>    
 
 
                 <!-- Campo Valor -->

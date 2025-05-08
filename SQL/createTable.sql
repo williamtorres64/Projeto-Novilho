@@ -51,10 +51,12 @@ create table tipoUsuario (
      id int auto_increment primary key,
      nome varchar(100) not null,
      categoriaId int not null,
+     tipoQuantidadeId int not null,
      valor float(24) not null,
      descricao varchar(500),
      nomeImagem varchar(100),
-     foreign key (categoriaId) references categoria(id)
+     foreign key (categoriaId) references categoria(id),
+     foreign key (tipoQuantidadeId) references tipoQuantidade(id)
  );
 
 -- tabela formaPagamento

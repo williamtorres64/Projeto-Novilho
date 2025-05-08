@@ -12,32 +12,9 @@ $nomeImagem = $_POST['nomeImagem'];
 $descricao = $_POST['descricao'];
 $categoriaId = $_POST['categoria'];
 $valor = $_POST['valor'];
+$tipoId = $_POST['tipoQuantidade'];
 
-// --- Input Validation (Basic examples, consider more robust validation) ---
-$errors = [];
-if (empty($nome)) {
-    $errors[] = "Nome do produto é obrigatório.";
-}
-if (empty($nomeImagem)) {
-    $errors[] = "Caminho da imagem é obrigatório.";
-}
-if (empty($descricao)) {
-    $errors[] = "Descrição do produto é obrigatória.";
-}
-if (empty($categoriaId) || !filter_var($categoriaId, FILTER_VALIDATE_INT)) {
-    $errors[] = "Categoria inválida.";
-}
-if (empty($valor) || !filter_var($valor, FILTER_VALIDATE_FLOAT) || $valor <= 0) {
-    $errors[] = "Valor inválido. Deve ser um número positivo.";
-}
 
-if (!empty($errors)) {
-    // Handle errors - e.g., redirect back to form with error messages
-    // For simplicity, we'll just die with errors here.
-    // In a real application, you'd want a more user-friendly way to display these.
-    die("Erro(s) na submissão: <br>" . implode("<br>", $errors) . "<br><a href='cadProduto.php" . ($id ? "?id=" . htmlspecialchars($id) : "") . "'>Voltar ao formulário</a>");
-}
-// --- End of Input Validation ---
 
 // Prepare data for SQL (to prevent SQL injection)
 $nome = $link->real_escape_string($nome);
@@ -45,6 +22,7 @@ $nomeImagem = $link->real_escape_string($nomeImagem);
 $descricao = $link->real_escape_string($descricao);
 $categoriaId = (int)$categoriaId; // Ensure it's an integer
 $valor = (float)$valor;           // Ensure it's a float
+$tipoId = (int)$tipoId;
 
 if (!empty($id)) {
     // UPDATE existing product
@@ -53,7 +31,8 @@ if (!empty($id)) {
                 nomeImagem = '$nomeImagem', 
                 descricao = '$descricao', 
                 categoriaId = $categoriaId, 
-                valor = $valor 
+                valor = $valor,
+                tipoQuantidadeId = $tipoId
             WHERE id = " . (int)$id; // Cast id to int for security
 
     if ($link->query($sql) === TRUE) {
@@ -65,8 +44,8 @@ if (!empty($id)) {
     }
 } else {
     // INSERT new product
-    $sql = "INSERT INTO produto (nome, nomeImagem, descricao, categoriaId, valor) 
-            VALUES ('$nome', '$nomeImagem', '$descricao', $categoriaId, $valor)";
+    $sql = "INSERT INTO produto (nome, nomeImagem, descricao, categoriaId, valor, tipoQuantidadeId) 
+            VALUES ('$nome', '$nomeImagem', '$descricao', $categoriaId, $valor, $tipoId)";
 
     if ($link->query($sql) === TRUE) {
         $newId = $link->insert_id; // Get the ID of the newly inserted product
