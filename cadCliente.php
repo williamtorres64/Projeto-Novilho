@@ -1,90 +1,115 @@
 <?php
-// Inclui o arquivo de conexão com o banco de dados
 include_once("conexao.php");
-
-// Verifica se existe um ID na URL (para edição de registro)
+session_start();
 if (isset($_GET["id"])) {
-    $id = $_GET["id"]; // Pega o ID da URL
+    $id = $_GET["id"];
+} else if (isset($_SESSION['usuario_id'])) {
+    $id = $_SESSION['usuario_id'];
 } else {
-    $id = ""; // Se não tiver ID, deixa vazio (modo de cadastro novo)
+    $id = '';
 }
 
-// Se tiver ID, busca os dados do cliente no banco
-if ($id != '') {
-    // Consulta SQL para pegar os dados do cliente (CUIDADO: vulnerável a SQL Injection)
-    $sql = "SELECT id, nome, sobrenome, usuario, senha, cep, endereco, telefone, status 
-            FROM cadastro 
-            WHERE id = '$id'";
-    
+if ($id !== '') {
+    $sql = "SELECT `id`, `cpf`, `nome`, `endereco`, `enderecoNumero`, `complemento`, `cep`, `email`, `senha`, `telefone`, `tipoId` 
+            FROM `usuario` 
+            WHERE `id` = '$id'";
     $resultado = mysqli_query($link, $sql);
-    
-    // Extrai os dados do resultado da consulta
     foreach ($resultado as $row) {
         $id = $row["id"];
+        $cpf = $row["cpf"];
         $nome = $row["nome"];
-        $sobrenome = $row["sobrenome"];
-        $usuario = $row["usuario"];
-        $senha = $row["senha"]; // ATENÇÃO: Senha em texto puro (inseguro)
+        $senha = $row["senha"];
         $cep = $row["cep"];
         $endereco = $row["endereco"];
+        $enderecoNumero = $row["enderecoNumero"];
+        $complemento = $row["complemento"];
+        $email = $row["email"];
         $telefone = $row["telefone"];
+        $tipoId = $row["tipoId"];
     }
 } else {
-    // Se não tiver ID, inicializa todas as variáveis vazias (modo de cadastro)
-    $nome = $sobrenome = $usuario = $senha = $cep = $endereco = $telefone = '';
+    $id = '';
+    $cpf = '';
+    $nome = '';
+    $senha = '';
+    $cep = '';
+    $endereco = '';
+    $enderecoNumero = '';
+    $complemento = '';
+    $email = '';
+    $telefone = '';
+    $tipoId = '';
 }
+// TODO: gerar atualiza_cliente com copilot
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR"> <!-- Idioma alterado para português do Brasil -->
+<html lang="en">
+
 <head>
-    <!-- Configurações básicas da página -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novilho (Cadastro)</title>
-    <link rel="stylesheet" href="estilo.css"> <!-- Arquivo de estilos CSS -->
+    <title>Novilho (Registro)</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
-    <!-- Estrutura principal da página -->
     <div>
-        <!-- Cabeçalho incluído de arquivo externo -->
         <div id="topo">
-            <?php include 'topo.php'; ?>
+            <?php
+            include 'topo.php'
+            ?>
         </div>
-        
-        <!-- Formulário de cadastro/edição -->
+        <div id="menu">
+            <?php
+            include 'menu.php'
+            ?>
+        </div>
+
         <div class="box_form">
-            <h1 class="titulos" style="font-size:40px">Cadastrar Cliente</h1>
-            
-            <!-- Formulário que envia dados para atualiza_cliente.php -->
+            <h1 class="titulos" style="font-size:40px">Registro</h1>
             <form action="atualiza_cliente.php" method="post" class="form">
-                
-                <!-- Campos do formulário pré-preenchidos quando em modo de edição -->
-                <input value="<?php echo htmlspecialchars($nome); ?>" type="text" name="nome" class="campos_cad" placeholder="Nome" required>
+<!-- TODO: refazer estrutura do formulario com copilot para mostar label ao inves de placeholder -->
 
-                <input value="<?php echo htmlspecialchars($sobrenome); ?>" type="text" name="sobrenome" class="campos_cad" placeholder="Sobrenome" required>
+                <input value="<?php echo $nome ?>" type="text" name="nome" class="campos_cad"
+                    placeholder="Nome" required>
 
-                <input value="<?php echo htmlspecialchars($usuario); ?>" type="text" name="usuario" class="campos_cad" placeholder="Usuário" required>
+                <input value="<?php echo $email ?>" type="email" name="email" class="campos_cad"
+                    placeholder="E-mail" required>
 
-                <input value="<?php echo htmlspecialchars($senha); ?>" type="password" name="senha" class="campos_cad" placeholder="Senha" required> <!-- Alterado para type="password" -->
+                <input value="<?php echo $senha ?>" type="text" name="senha" class="campos_cad"
+                    placeholder="Senha" required>
 
-                <input value="<?php echo htmlspecialchars($cep); ?>" type="text" name="cep" class="campos_cad" placeholder="CEP" required>
+                <input value="<?php echo $cpf ?>" type="text" name="cpf" class="campos_cad"
+                    placeholder="CPF" required>
 
-                <input value="<?php echo htmlspecialchars($endereco); ?>" type="text" name="endereco" class="campos_cad" placeholder="Endereço" required>
+                <input value="<?php echo $cep ?>" type="text" name="cep" class="campos_cad"
+                    placeholder="CEP" required>
 
-                <input value="<?php echo htmlspecialchars($telefone); ?>" type="tel" name="telefone" class="campos_cad" placeholder="Telefone" required> <!-- Alterado para type="tel" -->
+                <input value="<?php echo $endereco ?>" type="text" name="endereco" class="campos_cad"
+                    placeholder="Endereço" required>
 
-                <!-- Campo oculto para enviar o ID quando for edição -->
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
+                <input value="<?php echo $enderecoNumero ?>" type="text" name="enderecoNumero" class="campos_cad"
+                    placeholder="Número" required>
 
-                <!-- Botão de envio do formulário -->
+                <input value="<?php echo $complemento ?>" type="text" name="complemento" class="campos_cad"
+                    placeholder="Complemento">
+
+                <input value="<?php echo $telefone ?>" type="text" name="telefone" class="campos_cad"
+                    placeholder="Telefone" required>
+
+                <input value="<?php echo $tipoId ?>" type="hidden" name="tipoId" class="campos_cad"
+                    placeholder="Tipo ID" required value="1">
+
+                <input type="hidden" name="id" value="<?php echo $id ?>">
+
                 <input type="submit" class="campos_cad" value="<?php echo ($id != '') ? 'Atualizar' : 'Cadastrar'; ?>">
             </form>
         </div>
-        
-        <!-- Rodapé incluído de arquivo externo -->
         <div id="rodape">
-            <?php include 'rodape.php'; ?>
+            <?php
+            include 'rodape.php'
+            ?>
         </div>
 </body>
+
 </html>

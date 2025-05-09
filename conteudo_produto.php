@@ -2,13 +2,14 @@
 // Conexão com o banco de dados
 include_once("conexao.php");
 
+// TODO: verificar isset(get['cat']) ou isset(get['pesquisa']) e ajustar o sql de acordo
 
 // Consulta SQL para buscar produtos
 $sql = "SELECT prod.id id, prod.nome, `valor`, `descricao`, `nomeImagem` 
         FROM `produto` as prod
         INNER JOIN categoria cat ON cat.id = prod.categoriaId order by prod.id";
 $resultado = mysqli_query($link, $sql); // Executa a consulta
-
+// TODO: coletar imagens dos produtos
 ?>
 
 <!-- Listagem de produtos -->

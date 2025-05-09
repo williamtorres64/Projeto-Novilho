@@ -8,7 +8,6 @@ if (isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == "Administra
 } else {
     $btnPainel = '';
 }
-$nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : ''
 ;
 // Inclui o arquivo de conexão com o banco de dados
 include_once("conexao.php");
@@ -32,7 +31,7 @@ include_once("conexao.php");
     </div>
     
     <!-- Espaço para nome do usuário (atualmente estático) -->
-    <span style="margin-left: 10px;"><?php echo $nome ?></span>
+    <span style="margin-left: 10px;"><?php echo isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : '' ?></span>
     
     <!-- Controles do usuário -->
     <div class="user-controls">

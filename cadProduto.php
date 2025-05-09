@@ -9,9 +9,7 @@ if (isset($_GET["id"]) && $_GET["id"] !== '') {
     $id = ""; // modo de cadastro novo
 }
 
-// Se estiver em modo de edição, busca os dados do produto
 if ($id !== '') {
-    // OBS: ideal seria usar prepared statements para evitar SQL Injection
     $sql = "
         SELECT id, nome, nomeImagem, descricao, valor
         FROM produto

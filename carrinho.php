@@ -1,3 +1,11 @@
+<?php
+session_start();
+if ($_SESSION['logado'] !== true) {
+    header("Location: entrar.php");
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +16,7 @@
 </head>
 <body>
     <div id="geral">
-
+<!-- TODO: caso não haja nada no carrinho escrever que o carrinho esta vazio e mostrar somente o botao de voltar para a pagina inicial -->
         <!-- Topo da página -->
         <div id="topo">
             <?php include "topo.php"; ?>

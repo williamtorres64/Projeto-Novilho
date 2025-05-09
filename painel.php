@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,8 +9,10 @@
     <!-- Link para o arquivo CSS -->
     <link rel="stylesheet" href="estilo.css">
 </head>
+
 <body>
     <!-- Container principal da página -->
+    <!-- TODO: reestruturar pagina com copilot para ficar bonito -->
     <div id="geral">
         <!-- Seção do topo (incluída de arquivo externo) -->
         <div id="topo">
@@ -26,7 +26,7 @@
                 <h1 class="titulos" style="font-size:40px">Painel</h1><br>
                 <!-- Links/botões para outras páginas -->
                 <div><a href="regProduto.php" class="link_top1"><button>Cadastro Produto</button></a></div>
-                <div><a href="pedido.php" class="link_top1"><button>Tela de Pedidos</button></a></div>  
+                <div><a href="pedido.php" class="link_top1"><button>Tela de Pedidos</button></a></div>
             </center>
         </div>
         <!-- Rodapé (incluído de arquivo externo) -->

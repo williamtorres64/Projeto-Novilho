@@ -7,13 +7,15 @@ INSERT INTO `categoria` (`id`, `nome`) VALUES
 (3, 'Suínos'),
 (4, 'Peixes'),
 (5, 'Bebidas'),
-(6, 'Churrasco');
+(6, 'Churrasco'),
+(7, 'Empório');
 
 
 INSERT INTO `formaPagamento` (`id`, `nome`) VALUES
 (1, 'PIX'),
-(2, 'Débito'),
-(3, 'Crédito');
+(2, 'Dinheiro'),
+(3, 'Débito'),
+(4, 'Crédito');
 
 
 INSERT INTO `tipoQuantidade` (`id`, `tipo`) VALUES
