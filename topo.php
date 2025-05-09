@@ -8,7 +8,7 @@ if (isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == "Administra
 } else {
     $btnPainel = '';
 }
-$nome = $_SESSION['usuario_nome']
+$nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : ''
 ;
 // Inclui o arquivo de conexão com o banco de dados
 include_once("conexao.php");

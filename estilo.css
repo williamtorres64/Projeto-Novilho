@@ -149,6 +149,11 @@ nav a:hover {
     text-decoration: none;
 }
 
+#conteudoPedido {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .buy-button:hover {
     background-color: #b71c1c;
 }

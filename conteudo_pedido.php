@@ -1,48 +1,101 @@
 <?php
-// DADOS FIXOS (simulação - normalmente viriam do banco de dados)
-$pedidoId = 789;               // Número do pedido
-$clienteNome = "ClienteNome";  // Nome do cliente
-$data = "01/10/2025";          // Data do pedido
-$hora = "15:50";               // Horário do pedido
-$endereco = "Rua Almôndegas";  // Endereço de entrega
-$cobranca = "Cartão débito";   // Forma de pagamento
+include_once("conexao.php"); // Inclui o arquivo de conexão com o banco de dados
 
-// LÓGICA DE STATUS:
-// Verifica se existe parâmetro 'status' na URL e alterna entre 'Concluído' e 'Pendente'
-$status = isset($_GET['status']) && $_GET['status'] === 'Concluído' ? 'Concluído' : 'Pendente';
-$novoStatus = $status === 'Pendente' ? 'Concluído' : 'Pendente'; // Estado oposto para alternar
+// Lógica para atualizar o status do pedido
+if (isset($_GET['acao']) && $_GET['acao'] === 'mudar_status' && isset($_GET['id_pedido']) && isset($_GET['novo_status'])) {
+    $pedidoIdParaAtualizar = (int) $_GET['id_pedido'];
+    $novoStatusNome = $_GET['novo_status']; // Nome do novo status (ex: "Concluído")
+
+    // Lista de status permitidos para validação
+    $statusPermitidos = ['Pendente', 'Concluído', 'Em Preparo', 'Enviado', 'Cancelado'];
+
+    if (in_array($novoStatusNome, $statusPermitidos)) {
+        // Busca o ID do status pelo nome para atualizar a tabela 'compra'
+        $stmt_status_id = $link->prepare("SELECT id FROM status WHERE nome = ?");
+        if ($stmt_status_id) {
+            $stmt_status_id->bind_param("s", $novoStatusNome);
+            $stmt_status_id->execute();
+            $result_status_id = $stmt_status_id->get_result();
+
+            if ($status_row = $result_status_id->fetch_assoc()) {
+                $novoStatusIdParaAtualizar = $status_row['id'];
+
+                // Prepara e executa a atualização do statusId na tabela 'compra'
+                $stmt_update = $link->prepare("UPDATE compra SET statusId = ? WHERE id = ?");
+                if ($stmt_update) {
+                    $stmt_update->bind_param("ii", $novoStatusIdParaAtualizar, $pedidoIdParaAtualizar);
+                    $stmt_update->execute();
+                    $stmt_update->close();
+                    // Redireciona para a página de pedidos para limpar os parâmetros GET e evitar reenvio do formulário
+                    header("Location: pedido.php");
+                    exit();
+                } else {
+                    echo "Erro ao preparar a atualização de status: " . htmlspecialchars($link->error);
+                }
+            } else {
+                echo "Nome do status '" . htmlspecialchars($novoStatusNome) . "' não encontrado no banco de dados.";
+            }
+            $stmt_status_id->close();
+        } else {
+            echo "Erro ao preparar a busca pelo ID do status: " . htmlspecialchars($link->error);
+        }
+    } else {
+        echo "Status inválido fornecido: " . htmlspecialchars($novoStatusNome);
+    }
+}
+
+// Consulta SQL para buscar os pedidos e informações relacionadas
+$sql_pedidos = "SELECT 
+                    c.id AS pedidoId, 
+                    u.nome AS clienteNome, 
+                    c.data AS dataPedido, 
+                    u.endereco AS enderecoEntrega, 
+                    fp.nome AS formaPagamentoNome,
+                    s.nome AS statusPedidoNome
+                FROM compra c
+                JOIN usuario u ON c.usuarioId = u.id
+                JOIN formaPagamento fp ON c.formaPagamentoId = fp.id
+                JOIN status s ON c.statusId = s.id
+                ORDER BY c.id DESC, c.id DESC";
+
+$resultado_pedidos = mysqli_query($link, $sql_pedidos);
+
+if (!$resultado_pedidos) {
+    echo "Erro ao buscar pedidos: " . htmlspecialchars(mysqli_error($link));
+}
 ?>
 
-<!-- INÍCIO DO CARTÃO DE PEDIDO -->
+<?php if ($resultado_pedidos && mysqli_num_rows($resultado_pedidos) > 0): ?>
+    <?php while ($pedido = mysqli_fetch_assoc($resultado_pedidos)): ?>
+        <?php
+        $statusAtual = htmlspecialchars($pedido['statusPedidoNome']);
+        $proximoStatusNomeParaFormulario = ($statusAtual === 'Pendente') ? 'Concluído' : 'Pendente';
+        ?>
 <div class="pedido-card">
-
-    <!-- CABEÇALHO: Mostra número do pedido e nome do cliente -->
-    <div class="pedido-header">
-        <span>pedido (<?= $pedidoId ?>)</span> <!-- Número do pedido -->
-        <span><?= htmlspecialchars($clienteNome) ?></span> <!-- Nome (protegido contra XSS) -->
-    </div>
-
-    <!-- INFORMAÇÕES: Detalhes do pedido -->
-    <div class="pedido-info">
-        <p>Data/Hora: <?= $data ?> &nbsp; até <?= $hora ?></p> <!-- Data e hora -->
-        <p>End.: <?= htmlspecialchars($endereco) ?></p> <!-- Endereço (protegido) -->
-        <p>Cobrança: <?= htmlspecialchars($cobranca) ?></p> <!-- Forma de pagamento -->
-    </div>
-
-    <!-- RODAPÉ: Ações do pedido -->
-    <div class="pedido-footer">
-        <!-- FORMULÁRIO PARA ALTERAR STATUS -->
-        <form method="GET">
-            <!-- Campo oculto que envia o novo status quando clicado -->
-            <input type="hidden" name="status" value="<?= $novoStatus ?>">
-            <!-- Botão que mostra o status atual e alterna quando clicado -->
-            <button type="submit" class="status-button"><?= $status ?></button>
-        </form>
-        
-        <!-- ÍCONE DE IMPRESSÃO (ação não implementada) -->
-        <div class="print-icon">
-            <img src="printer-icon.png" alt="Imprimir" width="40" height="40">
+            <div class="pedido-header">
+                <span>Pedido (<?= htmlspecialchars($pedido['pedidoId']) ?>)</span>
+                <span><?= htmlspecialchars($pedido['clienteNome']) ?></span>
+                </div>
+            <div class="pedido-info">
+                <p>Data: <?= htmlspecialchars(date("d/m/Y", strtotime($pedido['dataPedido']))) ?></p>
+                <p>Endereço: <?= htmlspecialchars($pedido['enderecoEntrega']) ?></p>
+                <p>Forma de Pagamento: <?= htmlspecialchars($pedido['formaPagamentoNome']) ?></p>
+                </div>
+            <div class="pedido-footer">
+                <form method="GET" action="pedido.php">
+                    <input type="hidden" name="acao" value="mudar_status">
+                    <input type="hidden" name="id_pedido" value="<?= htmlspecialchars($pedido['pedidoId']) ?>">
+                    <input type="hidden" name="novo_status" value="<?= $proximoStatusNomeParaFormulario ?>">
+                    <button type="submit" class="status-button"><?= $statusAtual ?></button>
+                </form>
+                <div class="print-icon">
+                    <a href="imprimir_pedido.php?pedidoId=<?= htmlspecialchars($pedido['pedidoId']) ?>" target="_blank">
+                        <img src="imagens/printer-icon.png" alt="Imprimir" width="40" height="40">
+                    </a>
+                    </div>
+                    </div>
         </div>
-    </div>
-
-</div>
+    <?php endwhile; ?>
+    <?php else: ?>
+    <p>Nenhum pedido encontrado.</p>
+    <?php endif; ?>

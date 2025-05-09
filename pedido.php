@@ -20,7 +20,7 @@
         </div>
         
         <!-- Seção de conteúdo principal -->
-        <div id="conteudo">
+        <div id="conteudoPedido">
             <?php include "conteudo_pedido.php"; ?> <!-- Inclui o conteúdo específico de pedidos -->
         </div>
         
