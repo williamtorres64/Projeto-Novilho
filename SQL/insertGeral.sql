@@ -32,18 +32,18 @@ INSERT INTO `status` (`id`, `nome`) VALUES
 
 
 -- DADOS FICTÍCIOS
-INSERT INTO `usuario` (`id`, `cpf`, `nome`, `endereco`, `complemento`, `cep`, `email`, `senha`, `telefone`, `tipoId`) VALUES
-(1, '11111111111', 'Fulano da Silva 1', 'Rua Imaginaria 1, 123', 'Apto 101', '11111111', 'fulano1.silva@email.com', 'senha123', '11111111111', 1),
-(2, '22222222222', 'Ciclana Souza 2', 'Avenida Inexistente 2, 456', 'Casa 2', '22222222', 'ciclana2.souza@email.com', 'senha456', '11111111111', 1),
-(3, '33333333333', 'Beltrano Oliveira 3', 'Travessa Fantasma 3, 789', '', '33333333', 'beltrano3.oliveira@email.com', 'senha789', '11111111111', 1),
-(4, '44444444444', 'Josefina Costa 4', 'Alameda Virtual 4, 1011', 'Sala 3', '44444444', 'josefina4.costa@email.com', 'senhaabc', '11111111111', 1),
-(5, '55555555555', 'Antonio Pereira 5', 'Praça Irreal 5, 1213', '', '55555555', 'antonio5.pereira@email.com', 'senha_def','11111111111', 1),
-(6, '66666666666', 'Mariana Almeida 6', 'Estrada Ficticia 6, 1415', 'Bloco C', '66666666', 'mariana6.almeida@email.com', 'senha_ghi', '11111111111', 1),
-(7, '77777777777', 'Lucas Santos 7', 'Rua dos Sonhos 7, 1617', 'Fundos', '77777777', 'lucas7.santos@email.com', 'senha_jkl', '11111111111', 1),
-(8, '88888888888', 'Fernanda Lima 8', 'Avenida da Imaginação 8, 1819', '', '88888888', 'fernanda8.lima@email.com', 'senha_mno', '11111111111', 1),
-(9, '99999999999', 'Rafael Rocha 9', 'Viela Escondida 9, 2021', 'Casa da Frente', '99999999', 'rafael9.rocha@email.com', 'senha_pqr', '11111111111', 1),
-(10, '99654399999', 'Rafael Rocha 9', 'Viela Escondida 9, 2021', 'Casa da Frente', '94599999', 'rafae20.rocha@email.com', 'senha_pqr', '11114411111', 1),
-(11, '00456700000', 'Administrador', 'Rua 404', 'Apto 505', '00000000', 'admin@gmail.com', '123', '11112345111', 2);
+INSERT INTO `usuario` (`id`, `cpf`, `nome`, `endereco`, `enderecoNumero`, `complemento`, `cep`, `email`, `senha`, `telefone`, `tipoId`) VALUES
+(1, '11111111111', 'Fulano da Silva 1', 'Rua Imaginaria 1', '123', 'Apto 101', '11111111', 'fulano1.silva@email.com', 'senha123', '11111111111', 1),
+(2, '22222222222', 'Ciclana Souza 2', 'Avenida Inexistente 2', '456', 'Casa 2', '22222222', 'ciclana2.souza@email.com', 'senha456', '11111111111', 1),
+(3, '33333333333', 'Beltrano Oliveira 3', 'Travessa Fantasma 3', '789', '', '33333333', 'beltrano3.oliveira@email.com', 'senha789', '11111111111', 1),
+(4, '44444444444', 'Josefina Costa 4', 'Alameda Virtual 4', '1011', 'Sala 3', '44444444', 'josefina4.costa@email.com', 'senhaabc', '11111111111', 1),
+(5, '55555555555', 'Antonio Pereira 5', 'Praça Irreal 5', '1213', '', '55555555', 'antonio5.pereira@email.com', 'senha_def','11111111111', 1),
+(6, '66666666666', 'Mariana Almeida 6', 'Estrada Ficticia 6', '1415', 'Bloco C', '66666666', 'mariana6.almeida@email.com', 'senha_ghi', '11111111111', 1),
+(7, '77777777777', 'Lucas Santos 7', 'Rua dos Sonhos 7', '1617', 'Fundos', '77777777', 'lucas7.santos@email.com', 'senha_jkl', '11111111111', 1),
+(8, '88888888888', 'Fernanda Lima 8', 'Avenida da Imaginação 8', '1819', '', '88888888', 'fernanda8.lima@email.com', 'senha_mno', '11111111111', 1),
+(9, '99999999999', 'Rafael Rocha 9', 'Viela Escondida 9', '2021', 'Casa da Frente', '99999999', 'rafael9.rocha@email.com', 'senha_pqr', '11111111111', 1),
+(10, '99654399999', 'Rafael Rocha 9', 'Viela Escondida 9', '2021', 'Casa da Frente', '94599999', 'rafae20.rocha@email.com', 'senha_pqr', '11114411111', 1),
+(11, '00456700000', 'Administrador', 'Rua 404', '404', 'Apto 505', '00000000', 'admin@gmail.com', '123', '11112345111', 2);
 
 
 INSERT INTO `produto` (`nome`, `categoriaId`, `valor`, `descricao`, `nomeImagem`, `tipoQuantidadeId`) VALUES

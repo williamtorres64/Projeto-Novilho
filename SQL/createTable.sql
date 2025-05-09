@@ -26,6 +26,7 @@ create table tipoUsuario (
      cpf char(11) not null unique,
      nome varchar(100) not null,
      endereco varchar(100) not null,
+     enderecoNumero int,
      complemento varchar(100) not null,
      cep char(8) not null,
      email varchar(100) not null unique,
