@@ -2,14 +2,22 @@
 // Conexão com o banco de dados
 include_once("conexao.php");
 
-// TODO: verificar isset(get['cat']) ou isset(get['pesquisa']) e ajustar o sql de acordo
+$where = '';
+if (isset($_GET['cat'])) {
+    $cat = (int)$_GET['cat'];
+    $where = "WHERE prod.categoriaId = $cat";
+} elseif (isset($_GET['pesquisa'])) {
+    $pesquisa = mysqli_real_escape_string($link, $_GET['pesquisa']);
+    $where = "WHERE prod.nome LIKE '%$pesquisa%' OR prod.descricao LIKE '%$pesquisa%'";
+}
 
 // Consulta SQL para buscar produtos
-$sql = "SELECT prod.id id, prod.nome, `valor`, `descricao`, `nomeImagem` 
-        FROM `produto` as prod
-        INNER JOIN categoria cat ON cat.id = prod.categoriaId order by prod.id";
+$sql = "SELECT prod.id id, prod.nome, valor, descricao, nomeImagem 
+        FROM produto as prod
+        INNER JOIN categoria cat ON cat.id = prod.categoriaId
+        $where
+        ORDER BY prod.id";
 $resultado = mysqli_query($link, $sql); // Executa a consulta
-// TODO: coletar imagens dos produtos
 ?>
 
 <!-- Listagem de produtos -->
@@ -40,3 +48,4 @@ $resultado = mysqli_query($link, $sql); // Executa a consulta
         </div>
     </section>
 <?php endwhile; ?>
+

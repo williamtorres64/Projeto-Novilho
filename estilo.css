@@ -128,7 +128,11 @@ nav a:hover {
 
 .product-description {
     flex-grow: 1;
-    font-size: 0.95em;
+    font-size: 1.1em;
+}
+
+.price {
+    font-weight: bold;
 }
 
 .product-description ul {

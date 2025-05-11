@@ -40,7 +40,7 @@ if ($id !== '') {
     $telefone = '';
     $tipoId = '';
 }
-// TODO: gerar atualiza_cliente com copilot
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,38 +68,35 @@ if ($id !== '') {
         <div class="box_form">
             <h1 class="titulos" style="font-size:40px">Registro</h1>
             <form action="atualiza_cliente.php" method="post" class="form">
-<!-- TODO: refazer estrutura do formulario com copilot para mostar label ao inves de placeholder -->
 
-                <input value="<?php echo $nome ?>" type="text" name="nome" class="campos_cad"
-                    placeholder="Nome" required>
+                <label for="nome">Nome:</label>
+                <input value="<?php echo $nome ?>" type="text" id="nome" name="nome" class="campos_cad" required>
 
-                <input value="<?php echo $email ?>" type="email" name="email" class="campos_cad"
-                    placeholder="E-mail" required>
+                <label for="email">E-mail:</label>
+                <input value="<?php echo $email ?>" type="email" id="email" name="email" class="campos_cad" required>
 
-                <input value="<?php echo $senha ?>" type="text" name="senha" class="campos_cad"
-                    placeholder="Senha" required>
+                <label for="senha">Senha:</label>
+                <input value="<?php echo $senha ?>" type="text" id="senha" name="senha" class="campos_cad" required>
 
-                <input value="<?php echo $cpf ?>" type="text" name="cpf" class="campos_cad"
-                    placeholder="CPF" required>
+                <label for="cpf">CPF:</label>
+                <input value="<?php echo $cpf ?>" type="text" id="cpf" name="cpf" class="campos_cad" required>
 
-                <input value="<?php echo $cep ?>" type="text" name="cep" class="campos_cad"
-                    placeholder="CEP" required>
+                <label for="cep">CEP:</label>
+                <input value="<?php echo $cep ?>" type="text" id="cep" name="cep" class="campos_cad" required>
 
-                <input value="<?php echo $endereco ?>" type="text" name="endereco" class="campos_cad"
-                    placeholder="Endereço" required>
+                <label for="endereco">Endereço:</label>
+                <input value="<?php echo $endereco ?>" type="text" id="endereco" name="endereco" class="campos_cad" required>
 
-                <input value="<?php echo $enderecoNumero ?>" type="text" name="enderecoNumero" class="campos_cad"
-                    placeholder="Número" required>
+                <label for="enderecoNumero">Número:</label>
+                <input value="<?php echo $enderecoNumero ?>" type="text" id="enderecoNumero" name="enderecoNumero" class="campos_cad" required>
 
-                <input value="<?php echo $complemento ?>" type="text" name="complemento" class="campos_cad"
-                    placeholder="Complemento">
+                <label for="complemento">Complemento:</label>
+                <input value="<?php echo $complemento ?>" type="text" id="complemento" name="complemento" class="campos_cad">
 
-                <input value="<?php echo $telefone ?>" type="text" name="telefone" class="campos_cad"
-                    placeholder="Telefone" required>
+                <label for="telefone">Telefone:</label>
+                <input value="<?php echo $telefone ?>" type="text" id="telefone" name="telefone" class="campos_cad" required>
 
-                <input value="<?php echo $tipoId ?>" type="hidden" name="tipoId" class="campos_cad"
-                    placeholder="Tipo ID" required value="1">
-
+                <input type="hidden" name="tipoId" value="<?php echo ($tipoId !== '') ? $tipoId : '1'; ?>">
                 <input type="hidden" name="id" value="<?php echo $id ?>">
 
                 <input type="submit" class="campos_cad" value="<?php echo ($id != '') ? 'Atualizar' : 'Cadastrar'; ?>">
@@ -113,3 +110,4 @@ if ($id !== '') {
 </body>
 
 </html>
+

@@ -7,9 +7,7 @@ INSERT INTO `categoria` (`id`, `nome`) VALUES
 (3, 'Suínos'),
 (4, 'Peixes'),
 (5, 'Bebidas'),
-(6, 'Churrasco'),
-(7, 'Empório');
-
+(6, 'Churrasco');
 
 INSERT INTO `formaPagamento` (`id`, `nome`) VALUES
 (1, 'PIX'),
@@ -17,14 +15,12 @@ INSERT INTO `formaPagamento` (`id`, `nome`) VALUES
 (3, 'Débito'),
 (4, 'Crédito');
 
-
 INSERT INTO `tipoQuantidade` (`id`, `tipo`) VALUES
 (1, 'Inteiro'),
 (2, 'Decimal');
 
 INSERT INTO `tipoUsuario`(`nome`) VALUES ('Cliente'),('Administrador');
 
--- INSERTS PARA A NOVA TABELA STATUS
 INSERT INTO `status` (`id`, `nome`) VALUES
 (1, 'Pendente'),
 (2, 'Concluído'),
@@ -47,7 +43,7 @@ INSERT INTO `usuario` (`id`, `cpf`, `nome`, `endereco`, `enderecoNumero`, `compl
 (10, '99654399999', 'Rafael Rocha 9', 'Viela Escondida 9', '2021', 'Casa da Frente', '94599999', 'rafae20.rocha@email.com', 'senha_pqr', '11114411111', 1),
 (11, '00456700000', 'Administrador', 'Rua 404', '404', 'Apto 505', '00000000', 'admin@gmail.com', '123', '11112345111', 2);
 
-
+-- TODO: ajuste a parte do código que insere produtos na tabela de produtos para que as informações façam sentido com a realidade, ajuste a coluna 'categoriaId' de acordo com o nome do produto e de acordo com a tabela 'categoria', ajuste a coluna 'tipoQuantidadeId' definindo o valor 1 para produtos que são comprados de forma unitária e 2 para produtos que são comprados por quilo, adicione o prefixo "imagens/" no nome de cada imagem da coluna 'nomeImagem' 
 INSERT INTO `produto` (`nome`, `categoriaId`, `valor`, `descricao`, `nomeImagem`, `tipoQuantidadeId`) VALUES
 ('Picanha Uruguaia', FLOOR(RAND() * 6) + 1, ROUND(RAND() * 150 + 50, 2), 'Deliciosa picanha de origem Uruguaia, macia e suculenta.', 'picanha_uruguaia.jpg', 2),
 ('Carvão Vegetal 5kg', FLOOR(RAND() * 6) + 1, ROUND(RAND() * 40 + 15, 2), 'Saco de carvão de reflorestamento de alta qualidade para seu churrasco.', 'carvao_5kg.jpg', 1),
@@ -85,9 +81,10 @@ INSERT INTO `produto` (`nome`, `categoriaId`, `valor`, `descricao`, `nomeImagem`
 
 
 
+-- TODO: insira manualmente 30 registros fictícios na tabela usuarioCarrinho, os dados devem estar de acordo com a tabela 'produto' e com a tabela 'tipoQuantidade', para usuarioId insira um numero aleatorio entre 1 e 10, para produtoId escolha manualmente um dos produtos da tabela 'produto' (de 1 a 33), para tipoQuantidadeId insira 1 caso seja um produto comprado de forma inteira e 2 caso o produto seja comprado por quilo
 INSERT INTO `usuarioCarrinho` (`usuarioId`, `produtoId`, `quantidade`, `tipoQuantidadeId`) VALUES
-(FLOOR(RAND() * 10) + 1, FLOOR(RAND() *32) + 1, FLOOR(RAND() * 10) + 1, 1), -- Quantidade inteira
-(FLOOR(RAND() * 10) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 5 + 0.1, 2), 2), -- Quantidade float
+(FLOOR(RAND() * 10) + 1, FLOOR(RAND() *32) + 1, FLOOR(RAND() * 10) + 1, 1),
+(FLOOR(RAND() * 10) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 5 + 0.1, 2), 2),
 (FLOOR(RAND() * 10) + 1, FLOOR(RAND() *32) + 1, FLOOR(RAND() * 8) + 1, 1),
 (FLOOR(RAND() * 10) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 3 + 0.1, 2), 2),
 (FLOOR(RAND() * 10) + 1, FLOOR(RAND() *32) + 1, FLOOR(RAND() * 15) + 1, 1),
@@ -148,51 +145,13 @@ INSERT INTO `compra` (`usuarioId`, `data`, `formaPagamentoId`, `statusId`) VALUE
 (FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
 (FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
 (FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
-(FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1),
 (FLOOR(RAND() * 10) + 1, DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 41) - 30 DAY), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1);
 
 
+-- TODO: ajuste os dados da coluna idCompra para que sejam um número aleatório entre 1 e 10, para idProduto escolha manualmente um dos produtos da tabela 'produto' (de 1 a 33), para tipoQuantidadeId insira 1 caso seja um produto comprado de forma inteira e 2 caso o produto seja comprado por quilo
 INSERT INTO `compraProduto` (`idCompra`, `idProduto`, `valor`, `quantidade`, `tipoQuantidadeId`) VALUES
-(FLOOR(RAND() *32) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 200 + 10, 2), FLOOR(RAND() * 10) + 1, 1), -- Quantidade inteira
-(FLOOR(RAND() *32) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 150 + 5, 2), ROUND(RAND() * 5 + 0.1, 2), 2), -- Quantidade float
+(FLOOR(RAND() *32) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 200 + 10, 2), FLOOR(RAND() * 10) + 1, 1),
+(FLOOR(RAND() *32) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 150 + 5, 2), ROUND(RAND() * 5 + 0.1, 2), 2),
 (FLOOR(RAND() *32) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 180 + 8, 2), FLOOR(RAND() * 8) + 1, 1),
 (FLOOR(RAND() *32) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 100 + 3, 2), ROUND(RAND() * 3 + 0.1, 2), 2),
 (FLOOR(RAND() *32) + 1, FLOOR(RAND() *32) + 1, ROUND(RAND() * 250 + 15, 2), FLOOR(RAND() * 15) + 1, 1),

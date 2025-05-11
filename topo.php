@@ -25,12 +25,11 @@ include_once("conexao.php");
     <?php echo $btnPainel ?>
     
     <!-- Barra de pesquisa -->
+    <!-- TODO: quando o usuario fizer uma pesquisa, redirecionar ele para "index.php?pesquisa=<pesquisa_aqui>" -->
     <div class="search-bar">
         <input type="text" placeholder="pesquisar">
         <button>🔍️</button>
     </div>
-    
-    <!-- Espaço para nome do usuário (atualmente estático) -->
     <span style="margin-left: 10px;"><?php echo isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : '' ?></span>
     
     <!-- Controles do usuário -->

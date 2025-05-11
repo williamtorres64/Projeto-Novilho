@@ -47,7 +47,69 @@ if (!$stmt->execute()) {
     die("Erro ao limpar carrinho: " . $stmt->error);
 }
 
-echo "Compra finalizada com sucesso! Compra ID: " . $compraId;
-// TODO usar copilot para criar uma tela bonita aqui
+// Após limpar o carrinho, exibir uma página amigável
 ?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra Finalizada - Novilho Cortes</title>
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        .mensagem-sucesso {
+            text-align: center;
+            padding: 40px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            max-width: 600px;
+            margin: 50px auto;
+        }
+        .mensagem-sucesso h2 {
+            color: #4CAF50;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .mensagem-sucesso p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .botao {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .botao:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="geral">
+        <div id="topo">
+            <?php include "topo.php"; ?>
+        </div>
+
+        <div id="conteudo">
+            <div class="mensagem-sucesso">
+                <h2>🎉 Compra realizada com sucesso!</h2>
+                <p>Obrigado por escolher a Novilho Cortes.</p>
+                <p>Número da sua compra: <strong>#<?php echo $compraId; ?></strong></p>
+                <p>Entraremos em contato em breve com mais detalhes sobre a entrega.</p>
+                <a href="index.php" class="botao">🏠 Voltar para a página inicial</a>
+            </div>
+        </div>
+
+        <div id="rodape">
+            <?php include "rodape.php"; ?>
+        </div>
+    </div>
+</body>
+</html>
+
 

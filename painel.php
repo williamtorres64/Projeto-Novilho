@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <!-- Metadados básicos da página -->
@@ -8,31 +8,59 @@
     <title>Novilho (Painel)</title>
     <!-- Link para o arquivo CSS -->
     <link rel="stylesheet" href="estilo.css">
+    <style>
+        .painel-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .painel-container h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .painel-container .botao-painel {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 25px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+        .painel-container .botao-painel:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Container principal da página -->
-    <!-- TODO: reestruturar pagina com copilot para ficar bonito -->
     <div id="geral">
-        <!-- Seção do topo (incluída de arquivo externo) -->
         <div id="topo">
-            <?php include 'topo.php' ?>
+            <?php include 'topo.php'; ?>
         </div>
-        <br>
-        <!-- Conteúdo principal centralizado -->
-        <div id="conteudo" class="cad">
-            <center>
-                <!-- Título da página -->
-                <h1 class="titulos" style="font-size:40px">Painel</h1><br>
-                <!-- Links/botões para outras páginas -->
-                <div><a href="regProduto.php" class="link_top1"><button>Cadastro Produto</button></a></div>
-                <div><a href="pedido.php" class="link_top1"><button>Tela de Pedidos</button></a></div>
-            </center>
+
+        <div id="conteudo">
+            <div class="painel-container">
+                <h1>Painel Administrativo</h1>
+                <a href="regProduto.php" class="botao-painel">Cadastro de Produto</a>
+                <a href="pedido.php" class="botao-painel">Tela de Pedidos</a>
+            </div>
         </div>
-        <!-- Rodapé (incluído de arquivo externo) -->
+
         <div id="rodape">
-            <?php include 'rodape.php' ?>
+            <?php include 'rodape.php'; ?>
         </div>
+    </div>
 </body>
 
 </html>
+
