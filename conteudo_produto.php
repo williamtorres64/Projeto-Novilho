@@ -16,7 +16,7 @@ $sql = "SELECT prod.id id, prod.nome, valor, descricao, nomeImagem
         FROM produto as prod
         INNER JOIN categoria cat ON cat.id = prod.categoriaId
         $where
-        ORDER BY prod.id";
+        ORDER BY prod.nome";
 $resultado = mysqli_query($link, $sql); // Executa a consulta
 ?>
 

@@ -55,7 +55,11 @@ $stmt_produtos->execute();
 $resultado_produtos = $stmt_produtos->get_result();
 
 $produtos = [];
+$valorTotal = 0;
+
 while ($produto = $resultado_produtos->fetch_assoc()) {
+    $produto['subtotal'] = $produto['quantidade'] * $produto['valor'];
+    $valorTotal += $produto['subtotal'];
     $produtos[] = $produto;
 }
 $stmt_produtos->close();
@@ -117,6 +121,13 @@ $link->close();
             font-style: italic;
             color: #555;
         }
+
+        .pedido-total {
+            text-align: right;
+            font-size: 18px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -149,7 +160,7 @@ $link->close();
                             <?= htmlspecialchars($produto['tipoQuantidade']) ?></span>
                         <span><strong>Valor Unitário:</strong> R$ <?= number_format($produto['valor'], 2, ',', '.') ?></span>
                         <span><strong>Total:</strong> R$
-                            <?= number_format($produto['quantidade'] * $produto['valor'], 2, ',', '.') ?></span>
+                            <?= number_format($produto['subtotal'], 2, ',', '.') ?></span>
                     </div>
                     <?php if (!empty($produto['observacao'])): ?>
                         <div class="produto-observacao">
@@ -160,6 +171,10 @@ $link->close();
             <?php else: ?>
                 <p>Nenhum produto encontrado para este pedido.</p>
             <?php endif; ?>
+        </div>
+
+        <div class="pedido-total">Total do Pedido: R$
+            <?= number_format($valorTotal, 2, ',', '.') ?>
         </div>
     </div>
 </body>

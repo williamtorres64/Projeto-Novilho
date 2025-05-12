@@ -95,7 +95,7 @@ create table status (
      tipoQuantidadeId int not null,
      observacao varchar(512),
      foreign key (idCompra) references compra(id),
-     foreign key (idProduto) references produto(id),
+     foreign key (idProduto) references produto(id) ON DELETE CASCADE,
      foreign key (tipoQuantidadeId) references tipoQuantidade(id)
  );
  
@@ -108,7 +108,6 @@ create table status (
      tipoQuantidadeId int not null,
      observacao varchar(512),
      foreign key (usuarioId) references usuario(id),
-     foreign key (produtoId) references produto(id),
+     foreign key (produtoId) references produto(id) ON DELETE CASCADE,
      foreign key (tipoQuantidadeId) references tipoQuantidade(id)
  );
- 

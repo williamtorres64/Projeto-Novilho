@@ -60,6 +60,11 @@ header {
     cursor: pointer;
 }
 
+/* === Correção: remove margin-bottom do campo de pesquisa === */
+#search-input {
+    margin-bottom: 0; /* impede espaço extra abaixo da caixa de texto */
+}
+
 .user-controls a,
 header span {
     color: white;
@@ -848,3 +853,4 @@ nav a:hover {
     padding: 5px;
     border-radius: 4px;
 }
+

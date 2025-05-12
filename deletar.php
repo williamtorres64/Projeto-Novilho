@@ -8,11 +8,11 @@ if ($_POST['acao'] == 'deletarCarrinho') {
     
 // Remove postagem do banco
 } elseif ($_POST['acao'] == 'deletarPostagem') {
-    mysqli_query($link, "DELETE FROM postagens WHERE id=" . $id);
+    mysqli_query($link, "DELETE FROM produto WHERE id=" . $id);
     
 // Remove do cadastro (se ID válido)
 } else if ($id > 0) {
-    mysqli_query($link, "DELETE FROM cadastro WHERE id=" . $id);
+    mysqli_query($link, "DELETE FROM produto WHERE id=" . $id);
 }
 
 echo "sucesso";
